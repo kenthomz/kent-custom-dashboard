@@ -1,0 +1,140 @@
+$bg-dark: #0f172a;
+$primary-color: #6366f1;
+$text-gray: #94a3b8;
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 80px;
+$transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  // Ang width ay nag-aadjust base sa sidebar
+  width: calc(100% - 371px);
+  height: 70px;
+  background: rgba(15, 23, 42, 0.8); // Semi-transparent
+  backdrop-filter: blur(10px); // Glass effect
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 900;
+  transition: $transition;
+
+  &--wide {
+    width: calc(100% - #{$sidebar-collapsed-width});
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    width: 300px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+
+    &:focus-within {
+      border-color: $primary-color;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-icon {
+      color: $text-gray;
+      margin-right: 10px;
+    }
+
+    input {
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+      width: 100%;
+      font-size: 0.9rem;
+
+      &::placeholder { color: $text-gray; }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__icon-btn {
+    background: transparent;
+    border: none;
+    color: $text-gray;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: 0.2s;
+
+    &:hover { color: white; }
+
+    &--notify {
+      &::after { // Notification dot
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        background: #ef4444; // Red dot
+        border-radius: 50%;
+        border: 2px solid $bg-dark;
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 10px;
+    transition: 0.2s;
+
+    &:hover { background: rgba(255, 255, 255, 0.05); }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      
+      @media (max-width: 768px) { display: none; }
+    }
+
+    &-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    &-role {
+      font-size: 0.75rem;
+      color: $text-gray;
+    }
+  }
+
+  &__avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  &__chevron {
+    color: $text-gray;
+  }
+}

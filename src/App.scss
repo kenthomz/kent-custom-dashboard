@@ -1,3 +1,48 @@
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 80px;
+$content-area:85%;
+$transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+body {
+  margin: 0; // Importante: Alisin ang default margin ng browser
+  background-color: #0b1120;
+  overflow-x: hidden; // Iwas horizontal scroll
+}
+
+.app-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+
+  .main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    transition: $transition;
+    
+    // ITO ANG PINAKA-IMPORTANTE:
+    // Siguraduhing ang margin ay saktong lapad ng Sidebar
+    margin-left: $sidebar-width; 
+    width: calc(100% - #{$sidebar-width});
+  }
+
+  // Kapag naka-collapse ang sidebar
+  &.app--collapsed {
+    .main-wrapper {
+      margin-left: $sidebar-collapsed-width;
+      width: calc(100% - #{$sidebar-collapsed-width});
+    }
+  }
+}
+
+.content-area {
+  padding: 2rem;
+  margin: 70px auto; // Iwasan matakpan ng Header
+  color: white;
+  width: $content-area;
+
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

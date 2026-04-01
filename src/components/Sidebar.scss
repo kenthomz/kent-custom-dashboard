@@ -1,0 +1,164 @@
+// 1. Variables
+$primary-color: #6366f1;
+$bg-dark: #0f172a;
+$text-gray: #94a3b8;
+$text-light: #f8fafc;
+$hover-bg: rgba(255, 255, 255, 0.05);
+
+// Transition for smooth collapsing
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 80px;
+$transition-main: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+.sidebar {
+  width: $sidebar-width;
+  height: 100vh;
+  background-color: $bg-dark;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: $transition-main;
+  overflow: hidden; // Mahalaga para tago ang text kapag maliit na
+  z-index: 999;
+
+  // --- COLLAPSED STATE LOGIC ---
+  &--collapsed {
+    width: $sidebar-collapsed-width;
+    padding: 1.5rem 0.5rem; // Bawasan ang padding sa gilid
+
+    .sidebar__logo-text, 
+    .sidebar__text, 
+    .sidebar__section-title {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      display: none; // Siguradong mawawala ang text
+    }
+
+    .sidebar__link {
+      justify-content: center;
+      padding: 0.75rem 0;
+      gap: 0;
+    }
+
+    .sidebar__header {
+      justify-content: center;
+    }
+    
+    .sidebar__logout-btn {
+      justify-content: center;
+      span { display: none; }
+    }
+  }
+
+  // --- SUB-ELEMENTS ---
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &-icon {
+      background: $primary-color;
+      min-width: 35px; // Gumamit ng min-width para hindi mapitpit
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    &-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+  }
+
+  &__toggle-btn {
+    background: $hover-bg;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    &:hover { background: $primary-color; }
+  }
+
+  &__section-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: $text-gray;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    white-space: nowrap;
+  }
+
+  &__nav {
+    flex: 1;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    color: $text-gray;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: $hover-bg;
+      color: $text-light;
+    }
+
+    &--active {
+      background-color: $primary-color;
+      color: white;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  &__footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+  }
+
+  &__logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: #f87171;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.2s;
+    
+    &:hover { background-color: rgba(248, 113, 113, 0.1); }
+  }
+}
